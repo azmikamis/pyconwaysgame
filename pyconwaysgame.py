@@ -36,7 +36,7 @@ class Board(object):
             self.livecells = livecells
             self.colourcells(self.livecells, "black")
         else:
-            self.clear()
+            self.colourcells(self.livecells, "white")
             newlivecells = set()
             recalc = self.livecells | \
                      set(
@@ -78,6 +78,7 @@ class Board(object):
 
     def clear(self):
         self.colourcells(self.livecells, "white")
+        self.livecells.clear()
 
 def main():
     root = Tk()
