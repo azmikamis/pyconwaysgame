@@ -38,17 +38,13 @@ class Board(object):
         else:
             self.colourcells(self.livecells, "white")
             newlivecells = set()
-            recalc = self.livecells | \
-                     set(
-                        itertools.chain(
-                            *map(self.neighbours, self.livecells)
-                        )
-                     )
-            for point in recalc:
-                count = sum(
-                            (neighbour in self.livecells)
-                            for neighbour in self.neighbours(point)
-                        )
+            neighbours = [self.neighbours(point) for point in self.livecells]
+            uniqueneighbours = set(itertools.chain(*neighbours))
+            cellstocalc = self.livecells.union(uniqueneighbours)
+            for point in cellstocalc:
+                liveneighbours = [(neighbour in self.livecells) \
+                                 for neighbour in self.neighbours(point)]
+                count = sum(liveneighbours)
                 if count == 3 or (count == 2 and point in self.livecells):
                     newlivecells.add(point)
             self.livecells = newlivecells
@@ -84,7 +80,7 @@ def main():
     root = Tk()
     frame = Frame(root)
     frame.pack()
-    board = Board(frame, 25, 25)
+    board = Board(frame, 26, 26)
     #blinker = set([(9, 11), (10, 11), (11, 11)])
     #glider = set([(10, 9), (11, 10), (9, 11), (10, 11), (11, 11)])
     #board.advance(glider)
