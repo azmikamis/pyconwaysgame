@@ -40,8 +40,8 @@ class Board(object):
             newlivecells = set()
             neighbours = [self.neighbours(point) for point in self.livecells]
             uniqueneighbours = set(itertools.chain(*neighbours))
-            cellstocalc = self.livecells.union(uniqueneighbours)
-            for point in cellstocalc:
+            cellstotransit = self.livecells.union(uniqueneighbours)
+            for point in cellstotransit:
                 liveneighbours = [(neighbour in self.livecells) \
                                  for neighbour in self.neighbours(point)]
                 count = sum(liveneighbours)
