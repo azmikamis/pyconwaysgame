@@ -1,7 +1,7 @@
 import itertools
 from Tkinter import Tk, Label, Frame, Button, BOTTOM, LEFT
 
-class Board(object):
+class Game(object):
     def __init__(self, parent, sizex, sizey):
         self.sizex = sizex
         self.sizey = sizey
@@ -80,15 +80,15 @@ def main():
     root = Tk()
     frame = Frame(root)
     frame.pack()
-    board = Board(frame, 26, 26)
+    game = Game(frame, 26, 26)
     #blinker = set([(9, 11), (10, 11), (11, 11)])
     #glider = set([(10, 9), (11, 10), (9, 11), (10, 11), (11, 11)])
     #board.advance(glider)
     bottomframe = Frame(root)
     bottomframe.pack(side=BOTTOM)
-    buttonstep = Button(bottomframe, text="Step", command=board.advance)
+    buttonstep = Button(bottomframe, text="Step", command=game.advance)
     buttonstep.pack(side=LEFT)
-    buttonclear = Button(bottomframe, text="Clear", command=board.clear)
+    buttonclear = Button(bottomframe, text="Clear", command=game.clear)
     buttonclear.pack(side=LEFT, after=buttonstep)
     root.mainloop()
 
